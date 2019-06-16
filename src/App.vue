@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 id="heading">My Tasks</h1>
+    <Tasks v-bind:tasks="tasks" v-on:del-task="deleteTask"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Tasks from './components/Tasks'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Tasks
+  },
+  data() {
+    return {
+      tasks: [
+        {
+          id: 1,
+          description: 'Laundry',
+          completed: true
+        },
+        {
+          id: 2,
+          description: 'Ironing',
+          completed: false
+        },
+        {
+          id: 3,
+          description: 'Food shop',
+          completed: true
+        },
+        {
+          id: 4,
+          description: 'Clothes shop',
+          completed: false
+        }
+      ]
+    }
+  },
+  methods: {
+    deleteTask(id) {
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #heading {
+    text-align: center;
+    margin-top: 20px;
+    color: orange;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+      background: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 </style>
